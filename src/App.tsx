@@ -1,8 +1,13 @@
 import './App.css';
+import RepositoryList from './components/RepositoryList';
+import FavoriteRepositories from './components/FavoriteRepositories';
 
 function App() {
   return (
-    <div className="App" />
+    <div className="App">
+      <FavoriteRepositories />
+      <RepositoryList />
+    </div>
   );
 }
 
