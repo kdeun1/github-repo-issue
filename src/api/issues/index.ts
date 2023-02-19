@@ -1,6 +1,6 @@
-import { apiInstance } from "../index";
-import { Issue } from "./model";
-import { PromiseAxiosResponse } from "../common/model";
+import { apiInstance } from '../index';
+import { Issue } from './model';
+import { PromiseAxiosResponse } from '../common/model';
 
 const fetchReposIssues = (owner: string, repo: string)
   : PromiseAxiosResponse<Issue[]> => apiInstance.get(
@@ -9,4 +9,4 @@ const fetchReposIssues = (owner: string, repo: string)
 
 export {
   fetchReposIssues,
-}
+};
