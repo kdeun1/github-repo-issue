@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import { AxiosResponse } from 'axios';
 
 type PromiseAxiosResponse<T> = Promise<AxiosResponse<T>>;
 type DateTime = string | null;
@@ -163,4 +163,4 @@ export type {
   Milestone,
   PullRequest,
   ClosedBy,
-}
+};

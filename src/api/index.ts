@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setCommonInterceptors, setReqHeaders } from "./interceptors";
+import { setCommonInterceptors } from './interceptors';
 
 const createApiInstance = () => {
   const instance = axios.create({
@@ -13,4 +13,4 @@ const apiInstance = createApiInstance();
 
 export {
   apiInstance,
-}
+};
