@@ -1,12 +1,16 @@
 import './App.css';
-import RepositoryList from './components/RepositoryList';
+import { CaretRightOutlined } from '@ant-design/icons';
+import RepositorySearchFormFrame from './components/RepositorySearchFormFrame';
 import FavoriteRepositories from './components/FavoriteRepositories';
 
 function App() {
   return (
     <div className="App">
-      <FavoriteRepositories />
-      <RepositoryList />
+      <main className="app-main">
+        <RepositorySearchFormFrame />
+        <CaretRightOutlined />
+        <FavoriteRepositories />
+      </main>
     </div>
   );
 }

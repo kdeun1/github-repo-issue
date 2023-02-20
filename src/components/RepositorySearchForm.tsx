@@ -8,7 +8,8 @@ interface SearchFormProps {
 interface SearchFormField {
   searchText: string;
 }
-function SearchForm({ onSearchForm }: SearchFormProps) {
+
+const RepositorySearchForm = ({ onSearchForm }: SearchFormProps) => {
   const [repositories] = useState<Demo>();
   const [form] = Form.useForm();
 
@@ -45,6 +46,6 @@ function SearchForm({ onSearchForm }: SearchFormProps) {
         .map((item) => <div key={item.id}>{item.full_name}</div>) }
     </Form>
   );
-}
+};
 
-export default SearchForm;
+export default RepositorySearchForm;
