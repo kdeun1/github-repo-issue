@@ -24,4 +24,5 @@
 
 .favorite-heart-icon {
   padding-right: 5px;
+  cursor: pointer;
 }

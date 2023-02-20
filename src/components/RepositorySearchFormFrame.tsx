@@ -1,8 +1,6 @@
-import { useState } from 'react';
-import { List } from 'antd';
+import { useEffect, useState } from 'react';
 import type { RepoSearchResultItem } from '../api/search/model';
 import RepositorySearchForm from './RepositorySearchForm';
-import RepositoryListItem from './RepositoryListItem';
 import { fetchSearchRepositories } from '../api/search';
 import RepositoryList from './RepositoryList';
 
@@ -32,11 +30,19 @@ const RepositorySearchFormFrame = () => {
       console.log(e);
     }
   };
+  const initSearchRepositories = () => {
+    setRepositories([]);
+  };
+
+  useEffect(() => {
+    console.log('로컬스토리지에서 데이터 가져옴');
+  }, []);
 
   return (
     <section className="repository-list">
       <RepositorySearchForm
         onSearchForm={getSearchRepositories}
+        onResetForm={initSearchRepositories}
       />
       <RepositoryList
         items={repositories}
