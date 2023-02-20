@@ -4,23 +4,25 @@ import type { Demo } from '../api/search/model';
 
 interface SearchFormProps {
   onSearchForm: (searchText: string) => void;
+  onResetForm: () => void;
 }
 interface SearchFormField {
   searchText: string;
 }
 
-const RepositorySearchForm = ({ onSearchForm }: SearchFormProps) => {
+const RepositorySearchForm = ({ onSearchForm, onResetForm }: SearchFormProps) => {
   const [repositories] = useState<Demo>();
   const [form] = Form.useForm();
 
-  const onSubmit = async (fieldsValue: SearchFormField) => {
-    await onSearchForm(fieldsValue.searchText);
+  const onSubmit = (fieldsValue: SearchFormField) => {
+    onSearchForm(fieldsValue.searchText);
   };
 
   return (
     <Form
       form={form}
       onFinish={onSubmit}
+      onReset={onResetForm}
     >
       <Form.Item
         name="searchText"
@@ -40,6 +42,12 @@ const RepositorySearchForm = ({ onSearchForm }: SearchFormProps) => {
           type="primary"
         >
           Search
+        </Button>
+        <Button
+          htmlType="reset"
+          type="default"
+        >
+          Cancel
         </Button>
       </Form.Item>
       { repositories && repositories.items
