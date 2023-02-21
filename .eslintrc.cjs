@@ -36,6 +36,7 @@ module.exports = {
   },
   rules: {
     "linebreak-style": "off",
+    "no-debugger": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
     "import/extensions": ["error", "ignorePackages", {
       "js": "never",

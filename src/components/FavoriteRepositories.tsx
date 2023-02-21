@@ -15,19 +15,6 @@ const FavoriteRepositories = () => {
     console.log(`delete repo id : ${id}`);
   };
 
-  useEffect(() => {
-    const tempArr = [
-      { id: 1, name: 'FULL_NAME1', ownerLogin: 'kdeun1' },
-      { id: 2, name: 'FULL_NAME2', ownerLogin: 'kdeun1' },
-      { id: 3, name: 'FULL_NAME3', ownerLogin: 'kdeun1' },
-      { id: 4, name: 'FULL_NAME4', ownerLogin: 'kdeun1' },
-      { id: 5, name: 'FULL_NAME5', ownerLogin: 'kdeun1' },
-    ];
-    const repoList = localStorage.getItem('FavoriteRepositories') || JSON.stringify(tempArr);
-    const parsedRepoList = JSON.parse(repoList);
-    setRepositories(parsedRepoList);
-  }, []);
-
   return (
     <section className="favorite-repositories">
       <h4>
