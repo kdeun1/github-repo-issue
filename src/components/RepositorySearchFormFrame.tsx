@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { RepoSearchResultItem } from '../api/search/model';
 import RepositorySearchForm from './RepositorySearchForm';
 import { fetchSearchRepositories } from '../api/search';
 import RepositoryList from './RepositoryList';
+import { isExistArray } from '../common/utils';
 
 export interface RepositoryGridInfo {
   id: number;
@@ -12,6 +13,7 @@ export interface RepositoryGridInfo {
 
 const RepositorySearchFormFrame = () => {
   const [repositories, setRepositories] = useState<RepositoryGridInfo[]>();
+  const isExistRepo = isExistArray(repositories);
 
   const getSearchRepositories = async (searchText: string) => {
     try {
@@ -27,16 +29,12 @@ const RepositorySearchFormFrame = () => {
         }, []));
     } catch (e) {
       setRepositories([]);
-      console.log(e);
+      // TODO 오류 알람
     }
   };
   const initSearchRepositories = () => {
     setRepositories([]);
   };
-
-  useEffect(() => {
-    console.log('로컬스토리지에서 데이터 가져옴');
-  }, []);
 
   return (
     <section className="repository-list">
@@ -44,9 +42,11 @@ const RepositorySearchFormFrame = () => {
         onSearchForm={getSearchRepositories}
         onResetForm={initSearchRepositories}
       />
-      <RepositoryList
-        items={repositories}
-      />
+      {isExistRepo && (
+        <RepositoryList
+          items={repositories}
+        />
+      )}
     </section>
   );
 };

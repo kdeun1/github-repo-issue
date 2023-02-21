@@ -5,17 +5,17 @@ interface Props {
   id: number;
   name: string;
   ownerLogin: string;
+  onClick: () => void;
 }
 
 const RepositoryListItem = (props: Props) => {
-  const { id, ownerLogin, name } = props;
-  const onClickIcon = (iconId: number) => {
-    console.log(`onClickIcon id : ${iconId}`);
-  };
+  const {
+    id, ownerLogin, name, onClick,
+  } = props;
   return (
     <List.Item
       key={id}
-      onClick={() => onClickIcon(id)}
+      onClick={onClick}
     >
       <FavoriteHeartIcon
         isFavorite={false}
