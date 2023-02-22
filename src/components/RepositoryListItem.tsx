@@ -5,12 +5,13 @@ interface Props {
   id: number;
   name: string;
   ownerLogin: string;
+  isFavorite: boolean;
   onClick: () => void;
 }
 
 const RepositoryListItem = (props: Props) => {
   const {
-    id, ownerLogin, name, onClick,
+    id, ownerLogin, name, isFavorite, onClick,
   } = props;
   return (
     <List.Item
@@ -18,7 +19,7 @@ const RepositoryListItem = (props: Props) => {
       onClick={onClick}
     >
       <FavoriteHeartIcon
-        isFavorite={false}
+        isFavorite={isFavorite}
       />
       {ownerLogin}
       /

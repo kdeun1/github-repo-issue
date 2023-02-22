@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { List } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 
