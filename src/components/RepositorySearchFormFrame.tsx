@@ -3,7 +3,6 @@ import type { RepoSearchResultItem } from '../api/search/model';
 import RepositorySearchForm from './RepositorySearchForm';
 import { fetchSearchRepositories } from '../api/search';
 import RepositoryList from './RepositoryList';
-import { isExistArray } from '../common/utils';
 
 export interface RepositoryGridInfo {
   id: number;
@@ -13,7 +12,6 @@ export interface RepositoryGridInfo {
 
 const RepositorySearchFormFrame = () => {
   const [repositories, setRepositories] = useState<RepositoryGridInfo[]>();
-  const isExistRepo = isExistArray(repositories);
 
   const getSearchRepositories = async (searchText: string) => {
     try {
@@ -37,16 +35,14 @@ const RepositorySearchFormFrame = () => {
   };
 
   return (
-    <section className="repository-list">
+    <section className="repository-search-frame">
       <RepositorySearchForm
         onSearchForm={getSearchRepositories}
         onResetForm={initSearchRepositories}
       />
-      {isExistRepo && (
-        <RepositoryList
-          items={repositories}
-        />
-      )}
+      <RepositoryList
+        items={repositories}
+      />
     </section>
   );
 };

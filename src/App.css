@@ -1,3 +1,6 @@
+body {
+  min-width: 960px;
+}
 .layout {
   min-height: 100vh;
 }
@@ -7,13 +10,26 @@
 .app-main {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
   gap: 40px;
 }
 
-.repository-list {
-  border: 1px solid blue;
-  padding: 10px;
+.repository-search-frame {
+  display: flex;
+  gap: 20px;
+}
+
+.repository-list, .repository-search-form {
+  width: 300px;
+  height: 300px;
+}
+.repository-search-form__btn {
+  display: flex;
+  float: right;
+}
+.repository-search-form__btn button:not(:last-child) {
+  margin-right: 10px;
 }
 
 .favorite-repositories {

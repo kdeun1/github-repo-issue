@@ -1,5 +1,4 @@
-import { List } from 'antd';
-import { useEffect, useState } from 'react';
+import { List, message } from 'antd';
 import RepositoryListItem from './RepositoryListItem';
 import type { RepositoryGridInfo } from './RepositorySearchFormFrame';
 import useLocalStorage from '../hooks/useLocalStorage';
@@ -9,18 +8,27 @@ interface Props {
 }
 
 const RepositoryList = ({ items }: Props) => {
-  const [filteredList, setFilteredList] = useState(items);
   const [favoriteList, setFavoriteList] = useLocalStorage(
     'FavoriteRepositories',
     '[]',
   );
+  let parsedFavoriteList: RepositoryGridInfo[] = JSON.parse(favoriteList) || [];
+
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const overRegistrationWarning = () => {
+    messageApi.open({
+      type: 'warning',
+      content: '등록 개수는 최대 4개입니다.',
+    });
+  };
+
+  const isFavorite = (id: number) => parsedFavoriteList.findIndex((v) => v.id === id) !== -1;
 
   const onClickItem = (item: RepositoryGridInfo) => {
-    let parsedFavoriteList: RepositoryGridInfo[] = JSON.parse(favoriteList) || [];
     if (parsedFavoriteList.findIndex((info) => info.id === item.id) === -1) {
       if (parsedFavoriteList.length >= 4) {
-        // TODO 최대 4개임
-        console.log('4개가 맥스임!');
+        overRegistrationWarning();
       } else {
         parsedFavoriteList = [...parsedFavoriteList, item];
       }
@@ -34,28 +42,29 @@ const RepositoryList = ({ items }: Props) => {
     }
     setFavoriteList(JSON.stringify(parsedFavoriteList));
   };
-  useEffect(() => {
-    console.log('데이터가 있냐?');
-  }, [items]);
 
   return (
-    <List
-      itemLayout="vertical"
-      size="small"
-      pagination={{
-        pageSize: 5,
-      }}
-      dataSource={items}
-      renderItem={(item) => (
-        <RepositoryListItem
-          key={item.id}
-          id={item.id}
-          ownerLogin={item.ownerLogin}
-          name={item.name}
-          onClick={() => onClickItem(item)}
-        />
-      )}
-    />
+    <article className="repository-list">
+      {contextHolder}
+      <List
+        itemLayout="vertical"
+        size="small"
+        pagination={{
+          pageSize: 5,
+        }}
+        dataSource={items}
+        renderItem={(item) => (
+          <RepositoryListItem
+            key={item.id}
+            id={item.id}
+            ownerLogin={item.ownerLogin}
+            name={item.name}
+            isFavorite={isFavorite(item.id)}
+            onClick={() => onClickItem(item)}
+          />
+        )}
+      />
+    </article>
   );
 };
 

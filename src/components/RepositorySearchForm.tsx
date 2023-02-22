@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { Form, Input, Button } from 'antd';
-import type { Demo } from '../api/search/model';
+import {
+  Form, Input, Button, Typography,
+} from 'antd';
 
 interface SearchFormProps {
   onSearchForm: (searchText: string) => void;
@@ -11,7 +11,8 @@ interface SearchFormField {
 }
 
 const RepositorySearchForm = ({ onSearchForm, onResetForm }: SearchFormProps) => {
-  const [repositories] = useState<Demo>();
+  const { Title } = Typography;
+
   const [form] = Form.useForm();
 
   const onSubmit = (fieldsValue: SearchFormField) => {
@@ -19,40 +20,41 @@ const RepositorySearchForm = ({ onSearchForm, onResetForm }: SearchFormProps) =>
   };
 
   return (
-    <Form
-      form={form}
-      onFinish={onSubmit}
-      onReset={onResetForm}
-    >
-      <Form.Item
-        name="searchText"
-        label="Search Repository"
-        rules={[
-          {
-            required: true,
-            message: 'Please input repository name!',
-          },
-        ]}
+    <article className="repository-search-form">
+      <Title level={2} type="secondary">Github 검색</Title>
+      <Title level={4}>Public Repository</Title>
+      <Form
+        form={form}
+        onFinish={onSubmit}
+        onReset={onResetForm}
       >
-        <Input />
-      </Form.Item>
-      <Form.Item>
-        <Button
-          htmlType="submit"
-          type="primary"
+        <Form.Item
+          name="searchText"
+          rules={[
+            {
+              required: true,
+              message: 'Please input repository name!',
+            },
+          ]}
         >
-          Search
-        </Button>
-        <Button
-          htmlType="reset"
-          type="default"
-        >
-          Cancel
-        </Button>
-      </Form.Item>
-      { repositories && repositories.items
-        .map((item) => <div key={item.id}>{item.full_name}</div>) }
-    </Form>
+          <Input size="large" />
+        </Form.Item>
+        <Form.Item className="repository-search-form__btn">
+          <Button
+            htmlType="submit"
+            type="primary"
+          >
+            Search
+          </Button>
+          <Button
+            htmlType="reset"
+            type="default"
+          >
+            Cancel
+          </Button>
+        </Form.Item>
+      </Form>
+    </article>
   );
 };
 
