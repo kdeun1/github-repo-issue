@@ -1,8 +1,13 @@
 import { List, message } from 'antd';
 import RepositoryListItem from './RepositoryListItem';
-import type { RepositoryGridInfo } from './RepositorySearchFormFrame';
 import useLocalStorage from '../hooks/useLocalStorage';
+import CommonArticle from './CommonArticle';
 
+interface RepositoryGridInfo {
+  id: number;
+  name: string;
+  ownerLogin: string;
+}
 interface Props {
   items: RepositoryGridInfo[] | undefined;
 }
@@ -44,7 +49,7 @@ const RepositoryList = ({ items }: Props) => {
   };
 
   return (
-    <article className="repository-list">
+    <CommonArticle>
       {contextHolder}
       <List
         itemLayout="vertical"
@@ -64,7 +69,7 @@ const RepositoryList = ({ items }: Props) => {
           />
         )}
       />
-    </article>
+    </CommonArticle>
   );
 };
 

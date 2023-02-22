@@ -49,6 +49,7 @@ module.exports = {
     "import/no-unresolved": "off",
     "import/prefer-default-export": "off",
     "react/react-in-jsx-scope": "off",
-    "react/function-component-definition": "off"
+    "react/function-component-definition": "off",
+    "react/require-default-props": "off"
   },
 }
