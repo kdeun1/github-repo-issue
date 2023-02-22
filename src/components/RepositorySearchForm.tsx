@@ -1,6 +1,7 @@
 import {
   Form, Input, Button, Typography,
 } from 'antd';
+import CommonArticle from './CommonArticle';
 
 interface SearchFormProps {
   onSearchForm: (searchText: string) => void;
@@ -20,7 +21,7 @@ const RepositorySearchForm = ({ onSearchForm, onResetForm }: SearchFormProps) =>
   };
 
   return (
-    <article className="repository-search-form">
+    <CommonArticle>
       <Title level={2} type="secondary">Github 검색</Title>
       <Title level={4}>Public Repository</Title>
       <Form
@@ -54,7 +55,7 @@ const RepositorySearchForm = ({ onSearchForm, onResetForm }: SearchFormProps) =>
           </Button>
         </Form.Item>
       </Form>
-    </article>
+    </CommonArticle>
   );
 };
 

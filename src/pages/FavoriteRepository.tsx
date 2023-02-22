@@ -1,7 +1,7 @@
-import FavoriteRepositories from '../components/FavoriteRepositories';
+import FavoriteRepositoriesFrame from '../components/FavoriteRepositoriesFrame';
 
 const FavoriteRepository = () => (
-  <FavoriteRepositories />
+  <FavoriteRepositoriesFrame />
 );
 
 export default FavoriteRepository;

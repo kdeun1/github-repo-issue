@@ -4,7 +4,7 @@ import RepositorySearchForm from './RepositorySearchForm';
 import { fetchSearchRepositories } from '../api/search';
 import RepositoryList from './RepositoryList';
 
-export interface RepositoryGridInfo {
+interface RepositoryGridInfo {
   id: number;
   name: string;
   ownerLogin: string;
@@ -35,7 +35,7 @@ const RepositorySearchFormFrame = () => {
   };
 
   return (
-    <section className="repository-search-frame">
+    <section className="common-frame">
       <RepositorySearchForm
         onSearchForm={getSearchRepositories}
         onResetForm={initSearchRepositories}

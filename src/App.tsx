@@ -8,10 +8,22 @@ import CommonSider from './components/CommonSider';
 import CommonContent from './components/CommonContent';
 
 function App() {
+  const router = [
+    {
+      key: '/',
+      text: 'Search Repository',
+    },
+    {
+      key: '/favoriteRepository',
+      text: 'Favorite Repository',
+    },
+  ];
   return (
     <BrowserRouter>
       <Layout className="layout">
-        <CommonSider />
+        <CommonSider
+          router={router}
+        />
         <CommonContent />
       </Layout>
     </BrowserRouter>

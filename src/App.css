@@ -15,12 +15,12 @@ body {
   gap: 40px;
 }
 
-.repository-search-frame {
+.common-frame {
   display: flex;
   gap: 20px;
 }
 
-.repository-list, .repository-search-form {
+.common-article {
   width: 300px;
   height: 300px;
 }
