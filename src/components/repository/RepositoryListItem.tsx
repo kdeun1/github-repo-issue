@@ -2,6 +2,7 @@ import { List, Popconfirm } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { MouseEvent } from 'react';
 import FavoriteHeartIcon from '../common/FavoriteHeartIcon';
+import { CONFIRM } from '../../common/utils';
 
 interface Props {
   id: number;
@@ -47,12 +48,12 @@ const RepositoryListItem = (props: Props) => {
         {onDelete && (
           <span className="repository-list-item__suffix">
             <Popconfirm
-              title="즐겨찾기 목록 삭제"
-              description="즐겨찾기 목록을 지우시겠습니까?"
+              title={CONFIRM.FAVORITE.DELETE_TITLE}
+              description={CONFIRM.FAVORITE.DELETE_DESC}
               onConfirm={onConfirm}
               onCancel={(e) => e?.stopPropagation()}
-              okText="Yes"
-              cancelText="No"
+              okText={CONFIRM.COMMON.OK}
+              cancelText={CONFIRM.COMMON.CANCEL}
             >
               <CloseOutlined onClick={(e) => e.stopPropagation()} />
             </Popconfirm>

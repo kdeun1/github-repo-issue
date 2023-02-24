@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { message } from 'antd';
 import type { RepoSearchResultItem } from '../api/search/search-repositories-model';
 import RepositorySearchForm from './repository/RepositorySearchForm';
 import { fetchSearchRepositories } from '../api/search';
 import RepositoryList from './repository/RepositoryList';
+import { NOTI } from '../common/utils';
 
 interface RepositoryGridInfo {
   id: number;
@@ -12,6 +14,14 @@ interface RepositoryGridInfo {
 
 const RepositorySearchFormFrame = () => {
   const [repositories, setRepositories] = useState<RepositoryGridInfo[]>();
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const errorSearchRepoMsg = (content: string) => {
+    messageApi.open({
+      type: 'error',
+      content,
+    });
+  };
 
   const getSearchRepositories = async (searchText: string) => {
     try {
@@ -25,9 +35,9 @@ const RepositorySearchFormFrame = () => {
           });
           return acc;
         }, []));
-    } catch (e) {
+    } catch (e: any) {
+      errorSearchRepoMsg(e?.response?.data?.message ?? NOTI.EXCEPTION);
       setRepositories([]);
-      // TODO 오류 알람
     }
   };
   const initSearchRepositories = () => {
@@ -35,15 +45,18 @@ const RepositorySearchFormFrame = () => {
   };
 
   return (
-    <section className="common-frame">
-      <RepositorySearchForm
-        onSearchForm={getSearchRepositories}
-        onResetForm={initSearchRepositories}
-      />
-      <RepositoryList
-        items={repositories}
-      />
-    </section>
+    <>
+      {contextHolder}
+      <section className="common-frame">
+        <RepositorySearchForm
+          onSearchForm={getSearchRepositories}
+          onResetForm={initSearchRepositories}
+        />
+        <RepositoryList
+          items={repositories}
+        />
+      </section>
+    </>
   );
 };
 

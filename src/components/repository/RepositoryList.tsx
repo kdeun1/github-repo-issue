@@ -2,6 +2,7 @@ import { List, message } from 'antd';
 import RepositoryListItem from './RepositoryListItem';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import CommonArticle from '../common/CommonArticle';
+import { MSG } from '../../common/utils';
 
 interface RepositoryGridInfo {
   id: number;
@@ -23,19 +24,19 @@ const RepositoryList = ({ items }: Props) => {
   const successRegistMsg = () => {
     messageApi.open({
       type: 'success',
-      content: '정상적으로 등록되었습니다.',
+      content: MSG.COMMON.REGI_SUCCESS,
     });
   };
   const successDeleteMsg = () => {
     messageApi.open({
       type: 'success',
-      content: '정상적으로 삭제되었습니다.',
+      content: MSG.COMMON.DELETE_SUCCESS,
     });
   };
   const warningOverRegistMsg = () => {
     messageApi.open({
       type: 'warning',
-      content: '등록 개수는 최대 4개입니다.',
+      content: MSG.REPO.REGI_OVER_FAIL,
     });
   };
 
@@ -68,6 +69,7 @@ const RepositoryList = ({ items }: Props) => {
         itemLayout="vertical"
         size="small"
         pagination={{
+          simple: true,
           pageSize: 5,
         }}
         dataSource={items}

@@ -2,6 +2,7 @@ import { List, message, Typography } from 'antd';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import CommonArticle from '../common/CommonArticle';
 import RepositoryListItem from './RepositoryListItem';
+import { MSG } from '../../common/utils';
 
 interface RepositoryGridInfo {
   id: number;
@@ -24,7 +25,7 @@ const FavoriteRepositories = ({ onClickRow }: Props) => {
   const successDeleteMsg = () => {
     messageApi.open({
       type: 'success',
-      content: '정상적으로 삭제되었습니다.',
+      content: MSG.COMMON.DELETE_SUCCESS,
     });
   };
 
