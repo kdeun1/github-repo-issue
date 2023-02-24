@@ -37,6 +37,9 @@ module.exports = {
   rules: {
     "linebreak-style": "off",
     "no-debugger": "off",
+    'camelcase': 'off',
+    "no-plusplus": 'off',
+    '@typescript-eslint/camelcase': 'off',
     "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
     "import/extensions": ["error", "ignorePackages", {
       "js": "never",
@@ -50,6 +53,8 @@ module.exports = {
     "import/prefer-default-export": "off",
     "react/react-in-jsx-scope": "off",
     "react/function-component-definition": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "react/no-array-index-key": "off",
+    "jsx-a11y/no-static-element-interactions": "off"
   },
 }

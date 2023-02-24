@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import type { RepoSearchResultItem } from '../api/search/model';
-import RepositorySearchForm from './RepositorySearchForm';
+import type { RepoSearchResultItem } from '../api/search/search-repositories-model';
+import RepositorySearchForm from './repository/RepositorySearchForm';
 import { fetchSearchRepositories } from '../api/search';
-import RepositoryList from './RepositoryList';
+import RepositoryList from './repository/RepositoryList';
 
 interface RepositoryGridInfo {
   id: number;

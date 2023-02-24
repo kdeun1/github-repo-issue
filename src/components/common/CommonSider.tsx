@@ -1,4 +1,4 @@
-import { HddFilled, HeartFilled } from '@ant-design/icons';
+import { HddFilled } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -17,7 +17,6 @@ const CommonSider = ({ router }: Props) => {
   return (
     <Sider>
       <div className="sider-header" />
-      { pathName }
       <Menu theme="dark" defaultSelectedKeys={[pathName]}>
         {router.map((route: Route) => (
           <Menu.Item key={route.key}>
