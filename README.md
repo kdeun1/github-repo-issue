@@ -4,6 +4,7 @@
 ### 설정 및 환경 구성
 - React, TypeScript, React Router, Vite, Axios, Eslint, [Ant Design](https://ant.design/components/overview)
 - IDE : Webstorm
+- Node.js : v16.16.0
 ### 실행 방법
 ```
 npm install
@@ -38,8 +39,12 @@ npm run dev
 
 ---
 ## 특이사항
+### 번들러는 Vite를 사용
+- 빠른 개발 빌드속도의 이점을 위해 적용
 ### 디자인 UI 컴포넌트 라이브러리는 Ant Design을 사용
-- Pagination은 직접 구현
+- 등록된 Public Repository의 Issue 리스트의 Pagination은 직접 구현
 ### Github API는 REST API를 사용
 - 사용된 Github API의 Response Model 파일은 공식문서의 Response schema를 [json-schema-to-typescript](https://github.com/bcherny/json-schema-to-typescript)를 사용하여 Interface로 변환
-
+### Eslint 룰은 [eslint-config-airbnb](https://github.com/airbnb/javascript) 기반으로 세팅
+- 그 외 추가적인 js, ts, import, react 룰은 개발하면서 필요에 따라 하나씩 추가
+### 스타일 통일을 위해 [CSS Normalize](https://github.com/necolas/normalize.css) 적용
