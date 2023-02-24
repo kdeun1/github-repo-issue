@@ -1,9 +1,10 @@
-import { Typography } from 'antd';
+import { message, Typography } from 'antd';
 import { useEffect, useState } from 'react';
 import CommonArticle from '../common/CommonArticle';
 import { fetchSearchIssues } from '../../api/search';
 import IssueListItem from './IssueListItem';
 import CommonPagination from '../common/CommonPagination';
+import { NOTI } from '../../common/utils';
 
 interface SelectedRow {
   id: number | null;
@@ -29,6 +30,14 @@ const IssueList = ({ selectedRow }: Props) => {
   const [issues, setIssues] = useState<SelectedIssue[]>();
   const [totalCount, setTotalCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const errorSearchRepoMsg = (content: string) => {
+    messageApi.open({
+      type: 'error',
+      content,
+    });
+  };
 
   const getSearchRepositories = async (owner: string, repo: string) => {
     try {
@@ -44,11 +53,11 @@ const IssueList = ({ selectedRow }: Props) => {
         url: v.html_url,
         userLogin: v.user?.login || '',
       }))]);
-    } catch (e) {
+    } catch (e: any) {
+      errorSearchRepoMsg(e?.response?.data?.message ?? NOTI.EXCEPTION);
       setTotalCount(0);
       setCurrentPage(1);
       setIssues([]);
-      // TODO 오류 알람
     }
   };
 
@@ -67,29 +76,36 @@ const IssueList = ({ selectedRow }: Props) => {
   }, [currentPage]);
 
   return (
-    <CommonArticle>
-      <Title level={4}>
-        {ownerRepo ? `${ownerRepo} > Issue` : 'Select a Repository!'}
-      </Title>
-      <div>
-        {issues && issues.map((v) => (
-          <IssueListItem
-            key={v.id}
-            number={v.number}
-            title={v.title}
-            updated_at={v.updated_at}
-            url={v.url}
-            userLogin={v.userLogin}
+    <>
+      {contextHolder}
+      <CommonArticle>
+        <Title level={5}>
+          {ownerRepo ? `${ownerRepo} > Issue` : 'Select a Repository!'}
+        </Title>
+        <div>
+          {issues && issues.map((v) => (
+            <IssueListItem
+              key={v.id}
+              number={v.number}
+              title={v.title}
+              updated_at={v.updated_at}
+              url={v.url}
+              userLogin={v.userLogin}
+            />
+          ))}
+        </div>
+        <div>
+          {issues?.length && (
+          <CommonPagination
+            total={totalCount}
+            limit={PER_PAGE}
+            page={currentPage}
+            setPage={setCurrentPage}
           />
-        ))}
-      </div>
-      <CommonPagination
-        total={totalCount}
-        limit={PER_PAGE}
-        page={currentPage}
-        setPage={setCurrentPage}
-      />
-    </CommonArticle>
+          )}
+        </div>
+      </CommonArticle>
+    </>
   );
 };
 
