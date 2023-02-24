@@ -4,8 +4,8 @@ import { Layout } from 'antd';
 import {
   BrowserRouter,
 } from 'react-router-dom';
-import CommonSider from './components/CommonSider';
-import CommonContent from './components/CommonContent';
+import CommonSider from './components/common/CommonSider';
+import CommonContent from './components/common/CommonContent';
 
 function App() {
   const router = [

@@ -1,7 +1,7 @@
 import { Layout } from 'antd';
 import { Route, Routes } from 'react-router-dom';
-import SearchRepository from '../pages/SearchRepository';
-import FavoriteRepository from '../pages/FavoriteRepository';
+import SearchRepository from '../../pages/SearchRepository';
+import FavoriteRepository from '../../pages/FavoriteRepository';
 
 const {
   Header, Content, Footer,

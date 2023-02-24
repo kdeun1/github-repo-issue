@@ -1,7 +1,7 @@
 import {
   Form, Input, Button, Typography,
 } from 'antd';
-import CommonArticle from './CommonArticle';
+import CommonArticle from '../common/CommonArticle';
 
 interface SearchFormProps {
   onSearchForm: (searchText: string) => void;

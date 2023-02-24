@@ -1,7 +1,7 @@
 import { List, message } from 'antd';
 import RepositoryListItem from './RepositoryListItem';
-import useLocalStorage from '../hooks/useLocalStorage';
-import CommonArticle from './CommonArticle';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import CommonArticle from '../common/CommonArticle';
 
 interface RepositoryGridInfo {
   id: number;
@@ -18,10 +18,21 @@ const RepositoryList = ({ items }: Props) => {
     '[]',
   );
   let parsedFavoriteList: RepositoryGridInfo[] = JSON.parse(favoriteList) || [];
-
   const [messageApi, contextHolder] = message.useMessage();
 
-  const overRegistrationWarning = () => {
+  const successRegistMsg = () => {
+    messageApi.open({
+      type: 'success',
+      content: '정상적으로 등록되었습니다.',
+    });
+  };
+  const successDeleteMsg = () => {
+    messageApi.open({
+      type: 'success',
+      content: '정상적으로 삭제되었습니다.',
+    });
+  };
+  const warningOverRegistMsg = () => {
     messageApi.open({
       type: 'warning',
       content: '등록 개수는 최대 4개입니다.',
@@ -33,9 +44,10 @@ const RepositoryList = ({ items }: Props) => {
   const onClickItem = (item: RepositoryGridInfo) => {
     if (parsedFavoriteList.findIndex((info) => info.id === item.id) === -1) {
       if (parsedFavoriteList.length >= 4) {
-        overRegistrationWarning();
+        warningOverRegistMsg();
       } else {
         parsedFavoriteList = [...parsedFavoriteList, item];
+        successRegistMsg();
       }
     } else {
       const infoIndex = parsedFavoriteList
@@ -43,6 +55,7 @@ const RepositoryList = ({ items }: Props) => {
         .indexOf(item.id);
       if (infoIndex !== -1) {
         parsedFavoriteList.splice(infoIndex, 1);
+        successDeleteMsg();
       }
     }
     setFavoriteList(JSON.stringify(parsedFavoriteList));
@@ -65,7 +78,7 @@ const RepositoryList = ({ items }: Props) => {
             ownerLogin={item.ownerLogin}
             name={item.name}
             isFavorite={isFavorite(item.id)}
-            onClick={() => onClickItem(item)}
+            onClickIcon={() => onClickItem(item)}
           />
         )}
       />
